@@ -473,29 +473,32 @@ rightPopup = loadImage("Right.jpg");
 }
 
 function setup() {
+
   let canvas = createCanvas(800, 600);
   canvas.parent("game-container");
 
-    canvas.elt.addEventListener("touchstart", function(e) {
-  e.preventDefault();
+  canvas.elt.addEventListener("touchstart", function(e) {
 
-  const rect = canvas.elt.getBoundingClientRect();
+    e.preventDefault();
 
-  const x = (e.touches[0].clientX - rect.left) * (800 / rect.width);
-  const y = (e.touches[0].clientY - rect.top) * (600 / rect.height);
+    const rect = canvas.elt.getBoundingClientRect();
 
-  checkButton(x, y);
-}, { passive: false });
+    const x =
+      (e.touches[0].clientX - rect.left) *
+      (800 / rect.width);
 
-  checkButton(x, y);
-});
+    const y =
+      (e.touches[0].clientY - rect.top) *
+      (600 / rect.height);
 
     if (bgMusic.paused) {
       bgMusic.play().catch(() => {});
     }
 
     checkButton(x, y);
-  });
+
+  }, { passive: false });
+
 
   startVideo = createVideo("Start.mp4");
   startVideo.hide();
@@ -505,38 +508,38 @@ function setup() {
   legend1 = createVideo("Legend1.mp4");
   legend2 = createVideo("Legend2.mp4");
 
-legend1.hide();
-legend2.hide();
+  legend1.hide();
+  legend2.hide();
 
-legend1.elt.playsInline = true;
-legend2.elt.playsInline = true;
+  legend1.elt.playsInline = true;
+  legend2.elt.playsInline = true;
 
-  //bgMusic.play().catch(() => {});
 
   // Pole hasła
   passwordInput = createInput();
+
   passwordInput.attribute("type", "password");
   passwordInput.attribute("autocomplete", "off");
 
-  // Styl pola
   passwordInput.style("background", "transparent");
-passwordInput.style("border", "none");
-passwordInput.style("outline", "none");
-passwordInput.style("color", "#737A7B");
-passwordInput.style("font-size", "24px");
-passwordInput.style("text-align", "center");
-passwordInput.style("z-index", "1000");
+  passwordInput.style("border", "none");
+  passwordInput.style("outline", "none");
+  passwordInput.style("color", "#737A7B");
+  passwordInput.style("font-size", "24px");
+  passwordInput.style("text-align", "center");
+  passwordInput.style("z-index", "1000");
 
-passwordInput.position(
-  (windowWidth - 800) / 2 + 265,
-  (windowHeight - 600) / 2 + 285
-);
-passwordInput.size(250, 40);
-passwordInput.hide();
+  passwordInput.position(
+    (windowWidth - 800) / 2 + 265,
+    (windowHeight - 600) / 2 + 285
+  );
+
+  passwordInput.size(250, 40);
+  passwordInput.hide();
 
   passwordInput.elt.addEventListener("touchend", function () {
-  this.focus();
-});
+    this.focus();
+  });
 }
 
 function draw() {
