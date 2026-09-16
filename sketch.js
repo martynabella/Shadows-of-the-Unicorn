@@ -702,10 +702,17 @@ if (currentLock === 0) {
 // ====================
 
 function mousePressed() {
-if (bgMusic.paused) {
-  bgMusic.play();
-}
-  checkButton(mouseX, mouseY);
+  if (bgMusic.paused) {
+    bgMusic.play();
+  }
+
+  const canvas = document.querySelector("canvas");
+  const rect = canvas.getBoundingClientRect();
+
+  const x = (mouseX / width) * 800;
+  const y = (mouseY / height) * 600;
+
+  checkButton(x, y);
 }
 
 // ====================
@@ -714,7 +721,7 @@ if (bgMusic.paused) {
 
 function touchStarted() {
   if (touches.length > 0) {
-    checkButton(touches[0].x, touches[0].y);
+    checkButton(mouseX, mouseY);
   }
 
   return false;
