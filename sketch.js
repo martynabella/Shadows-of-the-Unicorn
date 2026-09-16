@@ -350,89 +350,89 @@ bgMusic.volume = 0.5;
 enterKey = loadImage("Enter_key.jpg");
 
 dark = loadImage("Dark.jpg");
-darkText = loadImage("Text/1.0.png");
+darkText = loadImage("1.0.png");
   
 screen1 = loadImage("1.jpg");
   screen1Pages = [
-  loadImage("Text/1.1.png"),
-  loadImage("Text/1.2.png"),
-  loadImage("Text/1.3.png"),
-  loadImage("Text/1.4.png"),
-  loadImage("Text/1.5.png")
+  loadImage("1.1.png"),
+  loadImage("1.2.png"),
+  loadImage("1.3.png"),
+  loadImage("1.4.png"),
+  loadImage("1.5.png")
 ];
 
   screen2 = loadImage("Screen2.jpg");
 
   screen2Pages = [
-  loadImage("Text/2.1.png"),
-  loadImage("Text/2.2.png"),
-  loadImage("Text/2.3.png")
+  loadImage("2.1.png"),
+  loadImage("2.2.png"),
+  loadImage("2.3.png")
 ];
 
   screen2TextPages = [
-  loadImage("Text/2.4.png"),
-  loadImage("Text/2.5.png"),
-  loadImage("Text/2.6.png")
+  loadImage("2.4.png"),
+  loadImage("2.5.png"),
+  loadImage("2.6.png")
 ];
 
 screen3 = loadImage("Screen3.jpg");
   screen3Pages = [
-  loadImage("Text/3.1.png"),
-  loadImage("Text/3.2.png"),
-  loadImage("Text/3.3.png")
+  loadImage("3.1.png"),
+  loadImage("3.2.png"),
+  loadImage("3.3.png")
 ];
 
 screen3TextPages = [
-  loadImage("Text/3.4.png"),
-  loadImage("Text/3.5.png"),
-  loadImage("Text/3.6.png")
+  loadImage("3.4.png"),
+  loadImage("3.5.png"),
+  loadImage("3.6.png")
 ];
 
 screen3ChoicePages = [
-  loadImage("Text/3.7.png"),
-  loadImage("Text/3.8.png"),
-  loadImage("Text/3.9.png")
+  loadImage("3.7.png"),
+  loadImage("3.8.png"),
+  loadImage("3.9.png")
 ];
 
   screen4 = loadImage("Screen4.jpg");
 
 screen4Pages = [
-  loadImage("Text/4.1.png"),
-  loadImage("Text/4.2.png"),
-  loadImage("Text/4.3.png")
+  loadImage("4.1.png"),
+  loadImage("4.2.png"),
+  loadImage("4.3.png")
 ];
 
 screen4TextPages = [
-  loadImage("Text/4.4.png"),
-  loadImage("Text/4.5.png")
+  loadImage("4.4.png"),
+  loadImage("4.5.png")
 ];
 
-screen4ChoicePage = loadImage("Text/4.6.png");
+screen4ChoicePage = loadImage("4.6.png");
 
   screen5 = loadImage("Screen5.jpg");
 
 screen5Pages = [
-  loadImage("Text/5.1.png"),
-  loadImage("Text/5.2.png")
+  loadImage("5.1.png"),
+  loadImage("5.2.png")
 ];
 
   ending1Pages = [
-  loadImage("Text/8.1.png"),
-  loadImage("Text/8.2.png"),
-  loadImage("Text/8.3.png"),
-  loadImage("Text/8.4.png")
+  loadImage("8.1.png"),
+  loadImage("8.2.png"),
+  loadImage("8.3.png"),
+  loadImage("8.4.png")
 ];
 
 ending2Pages = [
-  loadImage("Text/7.1.png"),
-  loadImage("Text/7.2.png"),
-  loadImage("Text/7.3.png")
+  loadImage("7.1.png"),
+  loadImage("7.2.png"),
+  loadImage("7.3.png")
 ];
 
 ending3Pages = [
-  loadImage("Text/6.1.png"),
-  loadImage("Text/6.2.png"),
-  loadImage("Text/6.3.png")
+  loadImage("6.1.png"),
+  loadImage("6.2.png"),
+  loadImage("6.3.png")
 ];
 
 congratulations = loadImage("Congratulations.jpg");
@@ -443,17 +443,17 @@ rightPopup = loadImage("Right.jpg");
   bookBackground = loadImage("Book.jpg");
 
   bookPages = [
-  loadImage("Book/Page0.png"),
-  loadImage("Book/Page1.jpg"),
-  loadImage("Book/Page2.jpg"),
-  loadImage("Book/Page3.jpg"),
-  loadImage("Book/Page4.jpg"),
-  loadImage("Book/Page5.jpg"),
-  loadImage("Book/Page6.jpg"),
-    loadImage("Book/Page7.jpg"),
-    loadImage("Book/Page8.jpg"),
-    loadImage("Book/Page9.jpg"),
-    loadImage("Book/Page10.jpg"),
+  loadImage("Page0.png"),
+  loadImage("Page1.jpg"),
+  loadImage("Page2.jpg"),
+  loadImage("Page3.jpg"),
+  loadImage("Page4.jpg"),
+  loadImage("Page5.jpg"),
+  loadImage("Page6.jpg"),
+    loadImage("Page7.jpg"),
+    loadImage("Page8.jpg"),
+    loadImage("Page9.jpg"),
+    loadImage("Page10.jpg"),
 ];
   
   startVideo = createVideo("Start.mp4");
