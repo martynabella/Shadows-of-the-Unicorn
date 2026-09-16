@@ -247,7 +247,6 @@ let bookBackButtonX = 755;
 let bookBackButtonY = 45;
 let bookBackButtonSize = 40;
 
-
 // ====================
 // KSIĄŻKA
 // ====================
@@ -280,7 +279,6 @@ let lock4;
 
 let locks = [];
 let currentLock = 0;
-
 
 // ====================
 // STRZAŁKI
@@ -470,16 +468,18 @@ rightPopup = loadImage("Right.jpg");
   loadImage("Page20.jpg"),
   loadImage("Page21.jpg")
 ];
-  
-  startVideo = createVideo("Start.mp4");
-  startVideo.hide();
 }
 
 function setup() {
   createCanvas(800, 600);
 
+  startVideo = createVideo("Start.mp4");
+  startVideo.hide();
+  startVideo.elt.playsInline = true;
+  startVideo.elt.loop = false;
+
   legend1 = createVideo("Legend1.mp4");
-legend2 = createVideo("Legend2.mp4");
+  legend2 = createVideo("Legend2.mp4");
 
 legend1.hide();
 legend2.hide();
@@ -489,9 +489,6 @@ legend2.elt.playsInline = true;
 
   //bgMusic.play().catch(() => {});
 
-  // Film nie będzie się zapętlał
-  startVideo.elt.loop = false;
-
   // Pole hasła
   passwordInput = createInput();
   passwordInput.attribute("type", "password");
@@ -499,24 +496,24 @@ legend2.elt.playsInline = true;
 
   // Styl pola
   passwordInput.style("background", "transparent");
-  passwordInput.style("border", "none");
-  passwordInput.style("outline", "none");
-  passwordInput.style("color", "#737A7B");
-  passwordInput.style("font-size", "24px");
-  passwordInput.style("text-align", "center");
+passwordInput.style("border", "none");
+passwordInput.style("outline", "none");
+passwordInput.style("color", "#737A7B");
+passwordInput.style("font-size", "24px");
+passwordInput.style("text-align", "center");
+passwordInput.style("z-index", "1000");
 
-  // Pozycja i rozmiar pola
-  passwordInput.position(265, 285);
-  passwordInput.size(250, 40);
+passwordInput.position(265, 285);
+passwordInput.size(250, 40);
+passwordInput.hide();
 
-  // Na początku niewidoczne
-  passwordInput.hide();
+  passwordInput.elt.addEventListener("touchend", function () {
+  this.focus();
+});
 }
 
 function draw() {
   background(0);
-
-  passwordInput.hide();
 
   if (gameState === "disclaimer") {
     drawDisclaimer();
@@ -668,7 +665,6 @@ triangle(
   arrowY + arrowHeight
 );
 
-
 // Prawa strzałka
 triangle(
   rightArrowX + arrowWidth / 2,
@@ -731,6 +727,20 @@ function checkButton(x, y) {
     bgMusic.play();
   }
 
+   if (showLeftPopup || showRightPopup) {
+
+  if (showLeftPopup) {
+    leftPopupFadingOut = true;
+    leftPopupFadingIn = false;
+  }
+
+  if (showRightPopup) {
+    rightPopupFadingOut = true;
+    rightPopupFadingIn = false;
+  }
+
+  return;
+}
 
   // =========================
   // DISCLAIMER → START
@@ -755,7 +765,6 @@ function checkButton(x, y) {
     return;
   }
 
-
   // =========================
   // START
   // =========================
@@ -778,7 +787,6 @@ function checkButton(x, y) {
 
       return;
     }
-
 
     // BOOK
 
@@ -803,7 +811,6 @@ function checkButton(x, y) {
 
     return;
   }
-
 
   // =========================
   // BOOK → START
@@ -830,7 +837,6 @@ function checkButton(x, y) {
       return;
     }
 
-
     if (!pageTurning) {
 
       // PRAWA STRONA → DALEJ
@@ -854,7 +860,6 @@ function checkButton(x, y) {
 
         return;
       }
-
 
       // LEWA STRONA → WSTECZ
 
@@ -881,7 +886,6 @@ function checkButton(x, y) {
 
     return;
   }
-
 
   // =========================
   // CHOOSE
@@ -911,7 +915,6 @@ function checkButton(x, y) {
       return;
     }
 
-
     // PRAWA STRZAŁKA
 
     let rightArrowDistance = dist(
@@ -934,7 +937,6 @@ function checkButton(x, y) {
       return;
     }
 
-
     // ENTER — tylko przy Lock1
 
     if (currentLock === 0) {
@@ -947,19 +949,22 @@ function checkButton(x, y) {
 
       if (insideEnterButton) {
 
-        playClick();
+  playClick();
 
-        gameState = "enterKey";
+  gameState = "enterKey";
 
-        passwordInput.show();
+  passwordInput.show();
 
-        return;
-      }
+  setTimeout(() => {
+    passwordInput.elt.focus();
+  }, 100);
+
+  return;
+}
     }
 
     return;
   }
-
 
   // =========================
   // ENTER KEY
@@ -1004,7 +1009,7 @@ function checkButton(x, y) {
     return;
   }
 
-  // =========================
+   // =========================
   // STAŁE PRZYCISKI
   // =========================
 
@@ -1014,10 +1019,11 @@ function checkButton(x, y) {
     gameState !== "choose" &&
     gameState !== "enterKey" &&
     gameState !== "dark" &&
+    gameState !== "legends" &&
     gameState !== "book"
   ) {
 
-    // LEWY
+    // LEWY PRZYCISK
 
     let leftDistance = dist(
       x,
@@ -1040,8 +1046,7 @@ function checkButton(x, y) {
       return;
     }
 
-
-    // PRAWY
+    // PRAWY PRZYCISK
 
     let rightDistance = dist(
       x,
@@ -1063,30 +1068,7 @@ function checkButton(x, y) {
 
       return;
     }
-
-
-    // POWRÓT Z PRAWEGO POPUPU
-
-    let insideRightBackButton =
-      x > rightBackButtonX - rightBackButtonWidth / 2 &&
-      x < rightBackButtonX + rightBackButtonWidth / 2 &&
-      y > rightBackButtonY - rightBackButtonHeight / 2 &&
-      y < rightBackButtonY + rightBackButtonHeight / 2;
-
-    if (
-      insideRightBackButton &&
-      rightPopupAlpha > 0
-    ) {
-
-      playClick();
-
-      rightPopupFadingOut = true;
-      rightPopupFadingIn = false;
-
-      return;
-    }
   }
-
 
   // =========================
   // DARK → SCREEN 1
@@ -1115,7 +1097,6 @@ function checkButton(x, y) {
     return;
   }
 
-
   // =========================
   // SCREEN 1
   // =========================
@@ -1143,7 +1124,6 @@ function checkButton(x, y) {
       return;
     }
 
-
     // → SCREEN 2
 
     let insideScreen12Button =
@@ -1163,7 +1143,6 @@ function checkButton(x, y) {
 
     return;
   }
-
 
   // =========================
   // SCREEN 2
@@ -1212,7 +1191,6 @@ function checkButton(x, y) {
       return;
     }
 
-
     // LEWY BIAŁY PRZYCISK
 
     let insideScreen2TextButton =
@@ -1230,7 +1208,6 @@ function checkButton(x, y) {
 
       return;
     }
-
 
     // → SCREEN 3
 
@@ -1401,7 +1378,6 @@ if (gameState === "screen3") {
       return;
     }
 
-
     // 4.4
 
     let insideScreen4TextButton =
@@ -1419,7 +1395,6 @@ if (gameState === "screen3") {
 
       return;
     }
-
 
     // 4.6
 
@@ -1443,7 +1418,6 @@ if (gameState === "screen3") {
       return;
     }
 
-
     // TAK
 
     let insideScreen4YesButton =
@@ -1464,7 +1438,6 @@ if (gameState === "screen3") {
 
       return;
     }
-
 
     // NIE
 
@@ -1489,7 +1462,6 @@ if (gameState === "screen3") {
 
     return;
   }
-
 
   // =========================
   // SCREEN 5
@@ -1530,7 +1502,6 @@ if (gameState === "screen5") {
     endingPopup = false;
     return;
   }
-
 
   // =========================
   // STRZAŁKA ZAKOŃCZENIA
@@ -1586,7 +1557,6 @@ if (gameState === "screen5") {
     return;
   }
 
-
   // =========================
   // PRZYCISK DO ZAKOŃCZENIA
   // =========================
@@ -1613,7 +1583,6 @@ if (gameState === "screen5") {
       return;
     }
   }
-
 
   // =========================
   // ZWYKŁA STRZAŁKA SCREEN 5
@@ -1656,10 +1625,6 @@ function drawEnterKey() {
   );
 
   passwordInput.show();
-
-  if (gameState === "enterKey") {
-    passwordInput.elt.focus();
-  }
 }
 
 function playClick() {
@@ -1680,7 +1645,6 @@ function drawDark() {
 
   noTint();
 
-
   // ====================
   // PRZYCISK
   // ====================
@@ -1697,7 +1661,6 @@ function drawDark() {
       darkButtonHeight
     );
   }
-
 
   // ====================
   // FADE
@@ -2122,7 +2085,6 @@ function drawLeftPopup() {
   noTint();
 }
 
-
 function drawRightPopup() {
 
   if (rightPopupFadingIn) {
@@ -2235,7 +2197,6 @@ function drawNormalSpread() {
 
   drawingContext.restore();
 
-
   // Delikatny cień przy grzbiecie
   noStroke();
 
@@ -2267,7 +2228,6 @@ function drawBookSpread() {
     return;
   }
 
-
   // Cień książki na głównym canvasie
   drawingContext.save();
 
@@ -2295,10 +2255,8 @@ function drawBookSpread() {
 
   drawingContext.restore();
 
-
   drawSpineShadow();
 }
-
 
 // ====================
 // CIEŃ GRZBIETU
@@ -2335,7 +2293,6 @@ function drawBookFlip() {
   // płynne przyspieszenie i zwalnianie
   let eased = 0.5 - 0.5 * cos(t * PI);
 
-
   // ==================================================
   // PRZEWRACANIE W PRAWO →
   // ==================================================
@@ -2354,20 +2311,17 @@ function drawBookFlip() {
     let newRight =
       bookPages[currentBookPage + 3];
 
-
     // LEWA STRONA — nieruchoma
     drawStaticPage(
       oldLeft,
       bookX
     );
 
-
     // PRAWA STRONA — nowa strona pod spodem
     drawStaticPage(
       newRight,
       bookX + pageWidth
     );
-
 
     // PRZEWRACANA KARTKA
     drawFlippingPage2D(
@@ -2378,7 +2332,6 @@ function drawBookFlip() {
       "right"
     );
   }
-
 
   // ==================================================
   // PRZEWRACANIE W LEWO ←
@@ -2398,20 +2351,17 @@ function drawBookFlip() {
     let oldRight =
       bookPages[currentBookPage + 1];
 
-
     // LEWA STRONA — nowa strona pod spodem
     drawStaticPage(
       newLeft,
       bookX
     );
 
-
     // PRAWA STRONA — nieruchoma
     drawStaticPage(
       oldRight,
       bookX + pageWidth
     );
-
 
     // PRZEWRACANA KARTKA
     drawFlippingPage2D(
@@ -2423,13 +2373,11 @@ function drawBookFlip() {
     );
   }
 
-
   // ==================================================
   // POSTĘP
   // ==================================================
 
   pageTurnProgress += 0.018;
-
 
   if (pageTurnProgress >= 1) {
 
@@ -2451,7 +2399,6 @@ function spineXForBook() {
   return bookX + pageWidth;
 }
 
-
 // ====================
 // NIERUCHOMA STRONA
 // ====================
@@ -2469,7 +2416,6 @@ function drawStaticPage(img, x) {
   );
 }
 
-
 // ====================
 // PRZEWRACANA KARTKA 2D
 // ====================
@@ -2485,7 +2431,6 @@ function drawFlippingPage2D(
   if (!frontImg || !backImg) {
     return;
   }
-
 
   // ==================================================
   // PRAWA KARTKA →
@@ -2508,14 +2453,12 @@ function drawFlippingPage2D(
       let width =
         pageWidth * (1 - smooth);
 
-
       drawingContext.save();
 
       drawingContext.shadowColor =
         "rgba(0,0,0,0.30)";
 
       drawingContext.shadowBlur = 12;
-
 
       image(
         frontImg,
@@ -2525,10 +2468,8 @@ function drawFlippingPage2D(
         bookHeight
       );
 
-
       drawingContext.restore();
     }
-
 
     // ------------------------------------------
     // DRUGA POŁOWA
@@ -2549,14 +2490,12 @@ function drawFlippingPage2D(
       let x =
         spineX - width;
 
-
       drawingContext.save();
 
       drawingContext.shadowColor =
         "rgba(0,0,0,0.30)";
 
       drawingContext.shadowBlur = 12;
-
 
       image(
         backImg,
@@ -2566,11 +2505,9 @@ function drawFlippingPage2D(
         bookHeight
       );
 
-
       drawingContext.restore();
     }
   }
-
 
   // ==================================================
   // LEWA KARTKA ←
@@ -2597,14 +2534,12 @@ function drawFlippingPage2D(
       let x =
         spineX - width;
 
-
       drawingContext.save();
 
       drawingContext.shadowColor =
         "rgba(0,0,0,0.30)";
 
       drawingContext.shadowBlur = 12;
-
 
       image(
         frontImg,
@@ -2614,10 +2549,8 @@ function drawFlippingPage2D(
         bookHeight
       );
 
-
       drawingContext.restore();
     }
-
 
     // ------------------------------------------
     // DRUGA POŁOWA
@@ -2635,14 +2568,12 @@ function drawFlippingPage2D(
       let width =
         pageWidth * smooth;
 
-
       drawingContext.save();
 
       drawingContext.shadowColor =
         "rgba(0,0,0,0.30)";
 
       drawingContext.shadowBlur = 12;
-
 
       image(
         backImg,
@@ -2652,11 +2583,9 @@ function drawFlippingPage2D(
         bookHeight
       );
 
-
       drawingContext.restore();
     }
   }
-
 
   // ==================================================
   // CIEŃ GRZBIETU
