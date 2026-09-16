@@ -16,15 +16,14 @@ body {
 #game-container {
   width: 800px;
   height: 600px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
 }
 
-canvas {
+#game-container canvas {
   display: block;
   width: 800px !important;
   height: 600px !important;
-  position: relative;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
