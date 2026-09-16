@@ -520,6 +520,8 @@ passwordInput.style("z-index", "1000");
 passwordInput.position(265, 285);
 passwordInput.size(250, 40);
 passwordInput.hide();
+
+  resizePasswordInput();
   
 }
 
@@ -709,20 +711,31 @@ if (currentLock === 0) {
 // ====================
 
 function mousePressed() {
-if (bgMusic.paused) {
-  bgMusic.play();
-}
+
+  if (bgMusic.paused) {
+    bgMusic.play();
+  }
+
   checkButton(mouseX, mouseY);
 }
+
 
 // ====================
 // DOTYK
 // ====================
 
 function touchStarted() {
-  if (touches.length > 0) {
-    checkButton(touches[0].x, touches[0].y);
+
+  if (bgMusic.paused) {
+    bgMusic.play();
   }
+
+  checkButton(mouseX, mouseY);
+
+  return false;
+}
+
+  checkButton(mouseX, mouseY);
 
   return false;
 }
@@ -2671,5 +2684,32 @@ function resizeGame() {
 }
 
 function windowResized() {
-  resizeGame();
+
+  let scale = min(
+    windowWidth / 800,
+    windowHeight / 600
+  );
+
+  let canvas = document.querySelector("canvas");
+
+  canvas.style.width = (800 * scale) + "px";
+  canvas.style.height = (600 * scale) + "px";
+
+  resizePasswordInput();
+}
+
+function resizePasswordInput() {
+
+  let scale = min(
+    windowWidth / 800,
+    windowHeight / 600
+  );
+
+  let inputX = (windowWidth - 800 * scale) / 2 + 265 * scale;
+  let inputY = (windowHeight - 600 * scale) / 2 + 285 * scale;
+
+  passwordInput.position(inputX, inputY);
+  passwordInput.size(250 * scale, 40 * scale);
+
+  passwordInput.style("font-size", (24 * scale) + "px");
 }
