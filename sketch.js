@@ -472,20 +472,11 @@ rightPopup = loadImage("Right.jpg");
 }
 
 function setup() {
-  //createCanvas(800, 600);
+  createCanvas(800, 600);
 
   bgMusic = new Audio("bg_music.mp3");
   bgMusic.loop = true;
   bgMusic.volume = 0.5;
-
-  let canvas = createCanvas(800, 600);
-
-canvas.style("position", "absolute");
-canvas.style("left", "50%");
-canvas.style("top", "50%");
-canvas.style("transform", "translate(-50%, -50%)");
-
-resizeGame();
 
   startVideo = createVideo("Start.mp4");
   startVideo.hide();
@@ -1658,7 +1649,7 @@ function drawEnterKey() {
     confirmButtonSize
   );
 
-  passwordInput.show();
+  //passwordInput.show();
 }
 
 function playClick() {
@@ -2667,6 +2658,7 @@ function drawLegends() {
 }
 
 function resizeGame() {
+
   let scale = min(
     windowWidth / 800,
     windowHeight / 600
@@ -2676,20 +2668,16 @@ function resizeGame() {
 
   canvas.style.width = (800 * scale) + "px";
   canvas.style.height = (600 * scale) + "px";
+
+  canvas.style.position = "absolute";
+  canvas.style.left = "50%";
+  canvas.style.top = "50%";
+  canvas.style.transform = "translate(-50%, -50%)";
 }
 
 function windowResized() {
 
-  let scale = min(
-    windowWidth / 800,
-    windowHeight / 600
-  );
-
-  let canvas = document.querySelector("canvas");
-
-  canvas.style.width = (800 * scale) + "px";
-  canvas.style.height = (600 * scale) + "px";
-
+  resizeGame();
   resizePasswordInput();
 }
 
