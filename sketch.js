@@ -1072,20 +1072,6 @@ function checkButton(x, y) {
       return;
     }
 
-
-    // POWRÓT Z PRAWEGO POPUPU
-
-    //let insideRightBackButton =
-    //  x > rightBackButtonX - rightBackButtonWidth / 2 &&
-    //  x < rightBackButtonX + rightBackButtonWidth / 2 &&
-    //  y > rightBackButtonY - rightBackButtonHeight / 2 &&
-      // y < rightBackButtonY + rightBackButtonHeight / 2;
-
-    //if (
-      // insideRightBackButton &&
-     // rightPopupAlpha > 0
-    ) {
-
       playClick();
 
       rightPopupFadingOut = true;
