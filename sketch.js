@@ -552,8 +552,6 @@ function draw() {
   drawScreen5();
 }
 
-  gameState = "legends";
-
     if (
   gameState !== "disclaimer" &&
   gameState !== "start" &&
@@ -967,18 +965,19 @@ function checkButton(x, y) {
       playClick();
 
       if (passwordInput.value() === correctPassword) {
+
   passwordInput.hide();
 
   currentLegend = 1;
+
+  darkFade = 255;
+  fadingToScreen1 = false;
+
   gameState = "legends";
 
   legend1.play();
-}
 
-        darkFade = 255;
-        fadingToScreen1 = false;
-
-      } else {
+} else {
 
         passwordInput.value("");
 
