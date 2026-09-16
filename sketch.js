@@ -751,22 +751,24 @@ function checkButton(x, y) {
 
   if (gameState === "disclaimer") {
 
-    let distance = dist(
-      x,
-      y,
-      disclaimerButtonX,
-      disclaimerButtonY
-    );
+  let distance = dist(
+    x,
+    y,
+    disclaimerButtonX,
+    disclaimerButtonY
+  );
 
-    if (distance < disclaimerButtonSize / 2) {
+  if (distance < disclaimerButtonSize / 2) {
 
-      gameState = "start";
-      startVideo.play();
+    enterFullscreen();
 
-    }
+    gameState = "start";
+    startVideo.play();
 
-    return;
   }
+
+  return;
+}
 
 
   // =========================
@@ -2692,5 +2694,15 @@ function drawLegends() {
     
     darkFade = 255;
     fadingToScreen1 = false;
+  }
+}
+
+function enterFullscreen() {
+  let elem = document.documentElement;
+
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) {
+    elem.webkitRequestFullscreen();
   }
 }
