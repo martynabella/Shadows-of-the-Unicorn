@@ -454,10 +454,21 @@ rightPopup = loadImage("Right.jpg");
   loadImage("Page4.jpg"),
   loadImage("Page5.jpg"),
   loadImage("Page6.jpg"),
-    loadImage("Page7.jpg"),
-    loadImage("Page8.jpg"),
-    loadImage("Page9.jpg"),
-    loadImage("Page10.jpg"),
+  loadImage("Page7.jpg"),
+  loadImage("Page8.jpg"),
+  loadImage("Page9.jpg"),
+  loadImage("Page10.jpg"),
+  loadImage("Page11.jpg"),
+  loadImage("Page12.jpg"),
+  loadImage("Page13.jpg"),
+  loadImage("Page14.jpg"),
+  loadImage("Page15.jpg"),
+  loadImage("Page16.jpg"),
+  loadImage("Page17.jpg"),
+  loadImage("Page18.jpg"),
+  loadImage("Page19.jpg"),
+  loadImage("Page20.jpg"),
+  loadImage("Page21.jpg")
 ];
 }
 
