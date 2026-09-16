@@ -476,14 +476,18 @@ function setup() {
   let canvas = createCanvas(800, 600);
   canvas.parent("game-container");
 
-    canvas.elt.addEventListener("pointerdown", function(e) {
-      
-    e.preventDefault();
+    canvas.elt.addEventListener("click", function(e) {
+  console.log("CANVAS CLICKED");
 
-    const rect = canvas.elt.getBoundingClientRect();
+  const rect = canvas.elt.getBoundingClientRect();
 
-    const x = (e.clientX - rect.left) * (800 / rect.width);
-    const y = (e.clientY - rect.top) * (600 / rect.height);
+  const x = (e.clientX - rect.left) * (800 / rect.width);
+  const y = (e.clientY - rect.top) * (600 / rect.height);
+
+  console.log("X:", x, "Y:", y);
+
+  checkButton(x, y);
+});
 
     if (bgMusic.paused) {
       bgMusic.play().catch(() => {});
