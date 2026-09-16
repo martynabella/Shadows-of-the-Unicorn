@@ -980,6 +980,8 @@ function checkButton(x, y) {
   gameState = "enterKey";
 
   passwordInput.show();
+passwordInput.elt.focus();
+passwordInput.elt.click();
 
   return;
 }    }
