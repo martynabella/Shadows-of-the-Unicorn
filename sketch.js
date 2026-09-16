@@ -475,7 +475,6 @@ rightPopup = loadImage("Right.jpg");
 function setup() {
 
   let canvas = createCanvas(800, 600);
-  canvas.parent("game-container");
 
   canvas.elt.addEventListener("touchstart", function(e) {
 
@@ -498,6 +497,9 @@ function setup() {
     checkButton(x, y);
 
   }, { passive: false });
+
+  // reszta setup() bez zmian...
+}
 
 
   startVideo = createVideo("Start.mp4");
