@@ -1011,21 +1011,21 @@ function checkButton(x, y) {
     return;
   }
 
-  // =========================
+   // =========================
   // STAŁE PRZYCISKI
   // =========================
 
   if (
-  gameState !== "disclaimer" &&
-  gameState !== "start" &&
-  gameState !== "choose" &&
-  gameState !== "enterKey" &&
-  gameState !== "dark" &&
-  gameState !== "legends" &&
-  gameState !== "book"
-) {
+    gameState !== "disclaimer" &&
+    gameState !== "start" &&
+    gameState !== "choose" &&
+    gameState !== "enterKey" &&
+    gameState !== "dark" &&
+    gameState !== "legends" &&
+    gameState !== "book"
+  ) {
 
-    // LEWY
+    // LEWY PRZYCISK
 
     let leftDistance = dist(
       x,
@@ -1049,7 +1049,7 @@ function checkButton(x, y) {
     }
 
 
-    // PRAWY
+    // PRAWY PRZYCISK
 
     let rightDistance = dist(
       x,
@@ -1068,14 +1068,6 @@ function checkButton(x, y) {
       showRightPopup = true;
       rightPopupFadingIn = true;
       rightPopupFadingOut = false;
-
-      return;
-    }
-
-      playClick();
-
-      rightPopupFadingOut = true;
-      rightPopupFadingIn = false;
 
       return;
     }
