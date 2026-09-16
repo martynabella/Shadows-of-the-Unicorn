@@ -476,6 +476,22 @@ function setup() {
   let canvas = createCanvas(800, 600);
   canvas.parent("game-container");
 
+    canvas.elt.addEventListener("pointerdown", function(e) {
+      
+    e.preventDefault();
+
+    const rect = canvas.elt.getBoundingClientRect();
+
+    const x = (e.clientX - rect.left) * (800 / rect.width);
+    const y = (e.clientY - rect.top) * (600 / rect.height);
+
+    if (bgMusic.paused) {
+      bgMusic.play().catch(() => {});
+    }
+
+    checkButton(x, y);
+  });
+
   startVideo = createVideo("Start.mp4");
   startVideo.hide();
   startVideo.elt.playsInline = true;
@@ -697,35 +713,7 @@ if (currentLock === 0) {
 }
 }
 
-// ====================
-// MYSZKA
-// ====================
 
-function mousePressed() {
-  if (bgMusic.paused) {
-    bgMusic.play();
-  }
-
-  const canvas = document.querySelector("canvas");
-  const rect = canvas.getBoundingClientRect();
-
-  const x = (mouseX / width) * 800;
-  const y = (mouseY / height) * 600;
-
-  checkButton(x, y);
-}
-
-// ====================
-// DOTYK
-// ====================
-
-function touchStarted() {
-  if (touches.length > 0) {
-    checkButton(mouseX, mouseY);
-  }
-
-  return false;
-}
 
 // ====================
 // SPRAWDZANIE PRZYCISKÓW
