@@ -454,110 +454,58 @@ rightPopup = loadImage("Right.jpg");
   loadImage("Page4.jpg"),
   loadImage("Page5.jpg"),
   loadImage("Page6.jpg"),
-  loadImage("Page7.jpg"),
-  loadImage("Page8.jpg"),
-  loadImage("Page9.jpg"),
-  loadImage("Page10.jpg"),
-  loadImage("Page11.jpg"),
-  loadImage("Page12.jpg"),
-  loadImage("Page13.jpg"),
-  loadImage("Page14.jpg"),
-  loadImage("Page15.jpg"),
-  loadImage("Page16.jpg"),
-  loadImage("Page17.jpg"),
-  loadImage("Page18.jpg"),
-  loadImage("Page19.jpg"),
-  loadImage("Page20.jpg"),
-  loadImage("Page21.jpg")
+    loadImage("Page7.jpg"),
+    loadImage("Page8.jpg"),
+    loadImage("Page9.jpg"),
+    loadImage("Page10.jpg"),
 ];
+  
+  startVideo = createVideo("Start.mp4");
+  startVideo.hide();
 }
 
 function setup() {
-
-  let canvas = createCanvas(800, 600);
-
-  canvas.elt.addEventListener("touchstart", function(e) {
-
-    e.preventDefault();
-
-    const rect = canvas.elt.getBoundingClientRect();
-
-    const x =
-      (e.touches[0].clientX - rect.left) *
-      (800 / rect.width);
-
-    const y =
-      (e.touches[0].clientY - rect.top) *
-      (600 / rect.height);
-
-    if (bgMusic.paused) {
-      bgMusic.play().catch(() => {});
-    }
-
-    checkButton(x, y);
-
-  }, { passive: false });
-
-
-  // =========================
-  // START VIDEO
-  // =========================
-
-  startVideo = createVideo("Start.mp4");
-
-  startVideo.hide();
-  startVideo.elt.playsInline = true;
-  startVideo.elt.loop = false;
-
-
-  // =========================
-  // LEGENDS
-  // =========================
+  createCanvas(800, 600);
 
   legend1 = createVideo("Legend1.mp4");
-  legend2 = createVideo("Legend2.mp4");
+legend2 = createVideo("Legend2.mp4");
 
-  legend1.hide();
-  legend2.hide();
+legend1.hide();
+legend2.hide();
 
-  legend1.elt.playsInline = true;
-  legend2.elt.playsInline = true;
+legend1.elt.playsInline = true;
+legend2.elt.playsInline = true;
 
+  //bgMusic.play().catch(() => {});
 
-  // =========================
-  // POLE HASŁA
-  // =========================
+  // Film nie będzie się zapętlał
+  startVideo.elt.loop = false;
 
+  // Pole hasła
   passwordInput = createInput();
-
   passwordInput.attribute("type", "password");
   passwordInput.attribute("autocomplete", "off");
 
+  // Styl pola
   passwordInput.style("background", "transparent");
   passwordInput.style("border", "none");
   passwordInput.style("outline", "none");
   passwordInput.style("color", "#737A7B");
   passwordInput.style("font-size", "24px");
   passwordInput.style("text-align", "center");
-  passwordInput.style("z-index", "1000");
 
-  passwordInput.position(
-    265,
-    285
-  );
-
+  // Pozycja i rozmiar pola
+  passwordInput.position(265, 285);
   passwordInput.size(250, 40);
 
+  // Na początku niewidoczne
   passwordInput.hide();
-
-  passwordInput.elt.addEventListener("touchend", function () {
-    this.focus();
-  });
-
 }
 
 function draw() {
   background(0);
+
+  passwordInput.hide();
 
   if (gameState === "disclaimer") {
     drawDisclaimer();
@@ -735,7 +683,28 @@ if (currentLock === 0) {
 }
 }
 
+// ====================
+// MYSZKA
+// ====================
 
+function mousePressed() {
+if (bgMusic.paused) {
+  bgMusic.play();
+}
+  checkButton(mouseX, mouseY);
+}
+
+// ====================
+// DOTYK
+// ====================
+
+function touchStarted() {
+  if (touches.length > 0) {
+    checkButton(touches[0].x, touches[0].y);
+  }
+
+  return false;
+}
 
 // ====================
 // SPRAWDZANIE PRZYCISKÓW
@@ -751,20 +720,6 @@ function checkButton(x, y) {
     bgMusic.play();
   }
 
-   if (showLeftPopup || showRightPopup) {
-
-  if (showLeftPopup) {
-    leftPopupFadingOut = true;
-    leftPopupFadingIn = false;
-  }
-
-  if (showRightPopup) {
-    rightPopupFadingOut = true;
-    rightPopupFadingIn = false;
-  }
-
-  return;
-}
 
   // =========================
   // DISCLAIMER → START
@@ -772,24 +727,22 @@ function checkButton(x, y) {
 
   if (gameState === "disclaimer") {
 
-  let distance = dist(
-    x,
-    y,
-    disclaimerButtonX,
-    disclaimerButtonY
-  );
+    let distance = dist(
+      x,
+      y,
+      disclaimerButtonX,
+      disclaimerButtonY
+    );
 
-  if (distance < disclaimerButtonSize / 2) {
+    if (distance < disclaimerButtonSize / 2) {
 
-    enterFullscreen();
+      gameState = "start";
+      startVideo.play();
 
-    gameState = "start";
-    startVideo.play();
+    }
 
+    return;
   }
-
-  return;
-}
 
 
   // =========================
@@ -983,18 +936,14 @@ function checkButton(x, y) {
 
       if (insideEnterButton) {
 
-  playClick();
+        playClick();
 
-  gameState = "enterKey";
+        gameState = "enterKey";
 
-  passwordInput.show();
+        passwordInput.show();
 
-  setTimeout(() => {
-    passwordInput.elt.focus();
-  }, 100);
-
-  return;
-}
+        return;
+      }
     }
 
     return;
@@ -1044,7 +993,7 @@ function checkButton(x, y) {
     return;
   }
 
-   // =========================
+  // =========================
   // STAŁE PRZYCISKI
   // =========================
 
@@ -1054,11 +1003,10 @@ function checkButton(x, y) {
     gameState !== "choose" &&
     gameState !== "enterKey" &&
     gameState !== "dark" &&
-    gameState !== "legends" &&
     gameState !== "book"
   ) {
 
-    // LEWY PRZYCISK
+    // LEWY
 
     let leftDistance = dist(
       x,
@@ -1082,7 +1030,7 @@ function checkButton(x, y) {
     }
 
 
-    // PRAWY PRZYCISK
+    // PRAWY
 
     let rightDistance = dist(
       x,
@@ -1101,6 +1049,28 @@ function checkButton(x, y) {
       showRightPopup = true;
       rightPopupFadingIn = true;
       rightPopupFadingOut = false;
+
+      return;
+    }
+
+
+    // POWRÓT Z PRAWEGO POPUPU
+
+    let insideRightBackButton =
+      x > rightBackButtonX - rightBackButtonWidth / 2 &&
+      x < rightBackButtonX + rightBackButtonWidth / 2 &&
+      y > rightBackButtonY - rightBackButtonHeight / 2 &&
+      y < rightBackButtonY + rightBackButtonHeight / 2;
+
+    if (
+      insideRightBackButton &&
+      rightPopupAlpha > 0
+    ) {
+
+      playClick();
+
+      rightPopupFadingOut = true;
+      rightPopupFadingIn = false;
 
       return;
     }
@@ -1675,6 +1645,10 @@ function drawEnterKey() {
   );
 
   passwordInput.show();
+
+  if (gameState === "enterKey") {
+    passwordInput.elt.focus();
+  }
 }
 
 function playClick() {
@@ -2717,4 +2691,3 @@ function drawLegends() {
     fadingToScreen1 = false;
   }
 }
-
