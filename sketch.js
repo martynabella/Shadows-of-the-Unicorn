@@ -476,7 +476,7 @@ legend2.hide();
 legend1.elt.playsInline = true;
 legend2.elt.playsInline = true;
 
-  bgMusic.play().catch(() => {});
+  //bgMusic.play().catch(() => {});
 
   // Film nie będzie się zapętlał
   startVideo.elt.loop = false;
