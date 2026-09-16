@@ -2,6 +2,8 @@
 let bgMusic;
 
 let gameState = "disclaimer";
+let endingStage = 0;
+let selectedEnding = 0;
 
 let screen4ChoicePage;
 
@@ -586,8 +588,8 @@ function draw() {
   if (showRightPopup) {
     drawRightPopup();
   }
-  if (showUnicorn) {
-  image(unicornImage, 0, 0, 800, 600);
+  if (gameState === "ending") {
+  drawEnding();
 }
 }
 
@@ -702,33 +704,17 @@ if (currentLock === 0) {
 // ====================
 
 function mousePressed() {
-
-  if (!bgMusic) {
-    bgMusic = new Audio("bg_music.mp3");
-    bgMusic.loop = true;
-    bgMusic.volume = 0.5;
-    bgMusic.play();
-  }
-
+  startMusic();
   checkButton(mouseX, mouseY);
 }
-
 
 // ====================
 // DOTYK
 // ====================
 
 function touchStarted() {
-
-  if (!bgMusic) {
-    bgMusic = new Audio("bg_music.mp3");
-    bgMusic.loop = true;
-    bgMusic.volume = 0.5;
-    bgMusic.play();
-  }
-
+  startMusic();
   checkButton(mouseX, mouseY);
-
   return false;
 }
 
@@ -1613,6 +1599,21 @@ if (gameState === "screen5") {
     }
   }
 
+if (gameState === "ending") {
+
+  if (endingStage === 1) {
+    endingStage = 2;
+    return;
+  }
+
+  if (endingStage === 2) {
+    endingStage = 3;
+    return;
+  }
+
+  return;
+}
+  
   // =========================
   // ZWYKŁA STRZAŁKA SCREEN 5
   // =========================
@@ -2067,7 +2068,43 @@ function drawScreen5() {
   }
 }
 
-  
+function drawEnding() {
+
+  // 1. Unicorn — tylko zakończenie 1 i 2
+  if (endingStage === 1) {
+
+    image(unicornImage, 0, 0, 800, 600);
+
+    return;
+  }
+
+  // 2. Właściwe PNG zakończenia
+  if (endingStage === 2) {
+
+    if (selectedEnding === 1) {
+      image(ending1Pages[0], 0, 0, 800, 600);
+    }
+
+    if (selectedEnding === 2) {
+      image(ending2Pages[0], 0, 0, 800, 600);
+    }
+
+    if (selectedEnding === 3) {
+      image(ending3Pages[0], 0, 0, 800, 600);
+    }
+
+    return;
+  }
+
+  // 3. Congratulations — zawsze
+  if (endingStage === 3) {
+
+    image(congratulations, 0, 0, 800, 600);
+
+    return;
+  }
+}
+
 function drawPermanentButtons() {
 
   // LEWY
@@ -2699,4 +2736,17 @@ function resizePasswordInput() {
   passwordInput.position(inputX, inputY);
   passwordInput.size(250 * scale, 40 * scale);
   passwordInput.style("font-size", (24 * scale) + "px");
+}
+
+function startMusic() {
+
+  if (!bgMusic) {
+    bgMusic = new Audio("bg_music.mp3");
+    bgMusic.loop = true;
+    bgMusic.volume = 0.5;
+  }
+
+  if (bgMusic.paused) {
+    bgMusic.play();
+  }
 }
