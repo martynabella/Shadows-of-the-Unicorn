@@ -2,8 +2,6 @@
 let bgMusic;
 
 let gameState = "disclaimer";
-let endingStage = 0;
-let selectedEnding = 0;
 
 let screen4ChoicePage;
 
@@ -588,9 +586,6 @@ function draw() {
   if (showRightPopup) {
     drawRightPopup();
   }
-  if (gameState === "ending") {
-  drawEnding();
-}
 }
 
 // ====================
@@ -731,9 +726,10 @@ function checkButton(x, y) {
   // =========================
 
   if (showUnicorn) {
-    showUnicorn = false;
-    return;
-  }
+  showUnicorn = false;
+  endingPopup = true;
+  return;
+}
 
   // =========================
   // STARTOWANIE MUZYKI
@@ -1518,59 +1514,59 @@ if (gameState === "screen5") {
 
   if (endingActive) {
 
-    let distance = dist(
-      x,
-      y,
-      screen5NextButtonX,
-      screen5NextButtonY
-    );
+  let distance = dist(
+    x,
+    y,
+    screen5NextButtonX,
+    screen5NextButtonY
+  );
 
-    let currentEndingPages;
+  let currentEndingPages;
+
+  if (
+    playerChoice === "yes" &&
+    screen4Choice === "no"
+  ) {
+    currentEndingPages = ending1Pages;
+
+  } else if (
+    playerChoice === "no" &&
+    screen4Choice === "no"
+  ) {
+    currentEndingPages = ending2Pages;
+
+  } else {
+    currentEndingPages = ending3Pages;
+  }
+
+  if (distance < screen5NextButtonSize / 2) {
 
     if (
-      playerChoice === "yes" &&
-      screen4Choice === "no"
+      currentEndingPage <
+      currentEndingPages.length - 1
     ) {
-      currentEndingPages = ending1Pages;
-
-    } else if (
-      playerChoice === "no" &&
-      screen4Choice === "no"
-    ) {
-      currentEndingPages = ending2Pages;
-
-    } else {
-      currentEndingPages = ending3Pages;
+      playClick();
+      currentEndingPage++;
     }
 
-   if (distance < screen5NextButtonSize / 2) {
+    else {
+      playClick();
 
-  if (
-    currentEndingPage <
-    currentEndingPages.length - 1
-  ) {
-    playClick();
-    currentEndingPage++;
-  }
-
-  else {
-  playClick();
-
-  if (
-    (playerChoice === "yes" && screen4Choice === "no") ||
-    (playerChoice === "no" && screen4Choice === "no")
-  ) {
-    showUnicorn = true;
-  } else {
-    endingPopup = true;
-  }
-}
-
-  return;
-}
+      if (
+        (playerChoice === "yes" && screen4Choice === "no") ||
+        (playerChoice === "no" && screen4Choice === "no")
+      ) {
+        showUnicorn = true;
+      } else {
+        endingPopup = true;
+      }
+    }
 
     return;
   }
+
+  return;
+}
 
   // =========================
   // PRZYCISK DO ZAKOŃCZENIA
@@ -2022,6 +2018,20 @@ function drawScreen5() {
       pages = ending3Pages;
     }
 
+
+    // UNICORN — tylko zakończenie 1 i 2
+if (showUnicorn) {
+  image(
+    unicornImage,
+    0,
+    0,
+    800,
+    600
+  );
+  return;
+}
+
+
     // PNG zakończenia
     if (pages[currentEndingPage]) {
       image(
@@ -2068,42 +2078,6 @@ function drawScreen5() {
   }
 }
 
-function drawEnding() {
-
-  // 1. Unicorn — tylko zakończenie 1 i 2
-  if (endingStage === 1) {
-
-    image(unicornImage, 0, 0, 800, 600);
-
-    return;
-  }
-
-  // 2. Właściwe PNG zakończenia
-  if (endingStage === 2) {
-
-    if (selectedEnding === 1) {
-      image(ending1Pages[0], 0, 0, 800, 600);
-    }
-
-    if (selectedEnding === 2) {
-      image(ending2Pages[0], 0, 0, 800, 600);
-    }
-
-    if (selectedEnding === 3) {
-      image(ending3Pages[0], 0, 0, 800, 600);
-    }
-
-    return;
-  }
-
-  // 3. Congratulations — zawsze
-  if (endingStage === 3) {
-
-    image(congratulations, 0, 0, 800, 600);
-
-    return;
-  }
-}
 
 function drawPermanentButtons() {
 
