@@ -459,16 +459,18 @@ rightPopup = loadImage("Right.jpg");
     loadImage("Page9.jpg"),
     loadImage("Page10.jpg"),
 ];
-  
-  startVideo = createVideo("Start.mp4");
-  startVideo.hide();
 }
 
 function setup() {
   createCanvas(800, 600);
 
+  startVideo = createVideo("Start.mp4");
+  startVideo.hide();
+  startVideo.elt.playsInline = true;
+  startVideo.elt.loop = false;
+
   legend1 = createVideo("Legend1.mp4");
-legend2 = createVideo("Legend2.mp4");
+  legend2 = createVideo("Legend2.mp4");
 
 legend1.hide();
 legend2.hide();
@@ -477,9 +479,6 @@ legend1.elt.playsInline = true;
 legend2.elt.playsInline = true;
 
   //bgMusic.play().catch(() => {});
-
-  // Film nie będzie się zapętlał
-  startVideo.elt.loop = false;
 
   // Pole hasła
   passwordInput = createInput();
