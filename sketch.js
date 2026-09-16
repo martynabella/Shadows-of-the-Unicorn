@@ -506,7 +506,10 @@ passwordInput.style("font-size", "24px");
 passwordInput.style("text-align", "center");
 passwordInput.style("z-index", "1000");
 
-passwordInput.position(265, 285);
+passwordInput.position(
+  (windowWidth - 800) / 2 + 265,
+  (windowHeight - 600) / 2 + 285
+);
 passwordInput.size(250, 40);
 passwordInput.hide();
 
