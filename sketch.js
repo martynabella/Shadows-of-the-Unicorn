@@ -260,12 +260,12 @@ let bookPages = [];
 let currentBookPage = 0;
 
 // Rozmiar całej otwartej książki
-let bookX = 20;
+let bookX = 100;
 let bookY = 100;
 let bookWidth = 600;
-let bookHeight = 450;
+let bookHeight = 400
 
-let pageWidth = 250;
+let pageWidth = 300;
 
 // Animacja przewracania
 let pageTurning = false;
