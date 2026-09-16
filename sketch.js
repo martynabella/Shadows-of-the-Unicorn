@@ -476,15 +476,16 @@ function setup() {
   let canvas = createCanvas(800, 600);
   canvas.parent("game-container");
 
-    canvas.elt.addEventListener("click", function(e) {
-  console.log("CANVAS CLICKED");
+    canvas.elt.addEventListener("touchstart", function(e) {
+  e.preventDefault();
 
   const rect = canvas.elt.getBoundingClientRect();
 
-  const x = (e.clientX - rect.left) * (800 / rect.width);
-  const y = (e.clientY - rect.top) * (600 / rect.height);
+  const x = (e.touches[0].clientX - rect.left) * (800 / rect.width);
+  const y = (e.touches[0].clientY - rect.top) * (600 / rect.height);
 
-  console.log("X:", x, "Y:", y);
+  checkButton(x, y);
+}, { passive: false });
 
   checkButton(x, y);
 });
