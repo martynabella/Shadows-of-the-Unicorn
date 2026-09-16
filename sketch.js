@@ -261,11 +261,11 @@ let currentBookPage = 0;
 
 // Rozmiar całej otwartej książki
 let bookX = 50;
-let bookY = 75;
+let bookY = 100;
 let bookWidth = 700;
 let bookHeight = 450;
 
-let pageWidth = 350;
+let pageWidth = 300;
 
 // Animacja przewracania
 let pageTurning = false;
