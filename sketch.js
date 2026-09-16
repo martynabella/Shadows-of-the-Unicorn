@@ -488,18 +488,16 @@ legend2.elt.playsInline = true;
 
   // Styl pola
   passwordInput.style("background", "transparent");
-  passwordInput.style("border", "none");
-  passwordInput.style("outline", "none");
-  passwordInput.style("color", "#737A7B");
-  passwordInput.style("font-size", "24px");
-  passwordInput.style("text-align", "center");
+passwordInput.style("border", "none");
+passwordInput.style("outline", "none");
+passwordInput.style("color", "#737A7B");
+passwordInput.style("font-size", "24px");
+passwordInput.style("text-align", "center");
+passwordInput.style("z-index", "1000");
 
-  // Pozycja i rozmiar pola
-  passwordInput.position(265, 285);
-  passwordInput.size(250, 40);
-
-  // Na początku niewidoczne
-  passwordInput.hide();
+passwordInput.position(265, 285);
+passwordInput.size(250, 40);
+passwordInput.hide();
 
   passwordInput.elt.addEventListener("touchend", function () {
   this.focus();
@@ -508,8 +506,6 @@ legend2.elt.playsInline = true;
 
 function draw() {
   background(0);
-
-  passwordInput.hide();
 
   if (gameState === "disclaimer") {
     drawDisclaimer();
@@ -940,14 +936,18 @@ function checkButton(x, y) {
 
       if (insideEnterButton) {
 
-        playClick();
+  playClick();
 
-        gameState = "enterKey";
+  gameState = "enterKey";
 
-        passwordInput.show();
+  passwordInput.show();
 
-        return;
-      }
+  setTimeout(() => {
+    passwordInput.elt.focus();
+  }, 100);
+
+  return;
+}
     }
 
     return;
