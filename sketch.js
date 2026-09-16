@@ -260,10 +260,10 @@ let bookPages = [];
 let currentBookPage = 0;
 
 // Rozmiar całej otwartej książki
-let bookX = 100;
+let bookX = 50;
 let bookY = 75;
 let bookWidth = 700;
-let bookHeight = 400;
+let bookHeight = 450;
 
 let pageWidth = 350;
 
