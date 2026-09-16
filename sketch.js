@@ -981,7 +981,7 @@ function checkButton(x, y) {
 
   passwordInput.show();
 passwordInput.elt.focus();
-passwordInput.elt.click();
+
 
   return;
 }    }
@@ -2662,7 +2662,6 @@ function drawLegends() {
 }
 
 function resizeGame() {
-
   let scale = min(
     windowWidth / 800,
     windowHeight / 600
@@ -2686,17 +2685,18 @@ function windowResized() {
 }
 
 function resizePasswordInput() {
+  let canvas = document.querySelector("canvas");
 
-  let scale = min(
-    windowWidth / 800,
-    windowHeight / 600
-  );
+  if (!canvas || !passwordInput) return;
 
-  let inputX = (windowWidth - 800 * scale) / 2 + 265 * scale;
-  let inputY = (windowHeight - 600 * scale) / 2 + 285 * scale;
+  let rect = canvas.getBoundingClientRect();
+
+  let scale = rect.width / 800;
+
+  let inputX = rect.left + 265 * scale;
+  let inputY = rect.top + 285 * scale;
 
   passwordInput.position(inputX, inputY);
   passwordInput.size(250 * scale, 40 * scale);
-
   passwordInput.style("font-size", (24 * scale) + "px");
 }
