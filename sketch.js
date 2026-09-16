@@ -500,6 +500,10 @@ legend2.elt.playsInline = true;
 
   // Na początku niewidoczne
   passwordInput.hide();
+
+  passwordInput.elt.addEventListener("touchend", function () {
+  this.focus();
+});
 }
 
 function draw() {
@@ -1645,10 +1649,6 @@ function drawEnterKey() {
   );
 
   passwordInput.show();
-
-  if (gameState === "enterKey") {
-    passwordInput.elt.focus();
-  }
 }
 
 function playClick() {
