@@ -476,7 +476,16 @@ rightPopup = loadImage("Right.jpg");
 }
 
 function setup() {
-  createCanvas(800, 600);
+  //createCanvas(800, 600);
+
+  let canvas = createCanvas(800, 600);
+
+canvas.style("position", "absolute");
+canvas.style("left", "50%");
+canvas.style("top", "50%");
+canvas.style("transform", "translate(-50%, -50%)");
+
+resizeGame();
 
   startVideo = createVideo("Start.mp4");
   startVideo.hide();
@@ -2647,4 +2656,20 @@ function drawLegends() {
     darkFade = 255;
     fadingToScreen1 = false;
   }
+}
+
+function resizeGame() {
+  let scale = min(
+    windowWidth / 800,
+    windowHeight / 600
+  );
+
+  let canvas = document.querySelector("canvas");
+
+  canvas.style.width = (800 * scale) + "px";
+  canvas.style.height = (600 * scale) + "px";
+}
+
+function windowResized() {
+  resizeGame();
 }
