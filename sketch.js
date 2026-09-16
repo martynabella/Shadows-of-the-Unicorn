@@ -337,10 +337,6 @@ let rightBackButtonHeight = 50;
 function preload() {
   
   //clickSound = new Audio("Click.mp3");
-
-bgMusic = new Audio("bg_music.mp3");
-bgMusic.loop = true;
-bgMusic.volume = 0.5;
   
   disclaimer = loadImage("Disclaimer.jpg");
   choose = loadImage("Choose.jpg");
@@ -477,6 +473,10 @@ rightPopup = loadImage("Right.jpg");
 
 function setup() {
   //createCanvas(800, 600);
+
+  bgMusic = new Audio("bg_music.mp3");
+  bgMusic.loop = true;
+  bgMusic.volume = 0.5;
 
   let canvas = createCanvas(800, 600);
 
