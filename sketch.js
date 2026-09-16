@@ -5,6 +5,10 @@ let gameState = "disclaimer";
 
 let screen4ChoicePage;
 
+let legend1;
+let legend2;
+let currentLegend = 1;
+
 let disclaimer;
 let startVideo;
 let choose;
@@ -336,6 +340,12 @@ function preload() {
 bgMusic = new Audio("bg_music.mp3");
 bgMusic.loop = true;
 bgMusic.volume = 0.5;
+
+  legend1 = createVideo("Legend1.mp4");
+legend2 = createVideo("Legend2.mp4");
+
+legend1.hide();
+legend2.hide();
   
   disclaimer = loadImage("Disclaimer.jpg");
   choose = loadImage("Choose.jpg");
@@ -510,6 +520,10 @@ function draw() {
     drawEnterKey();
   }
 
+  if (gameState === "legends") {
+  drawLegends();
+}
+
   if (gameState === "dark") {
   drawDark();
 }
@@ -537,6 +551,8 @@ function draw() {
   if (gameState === "screen5") {
   drawScreen5();
 }
+
+  gameState = "legends";
 
     if (
   gameState !== "disclaimer" &&
@@ -951,10 +967,13 @@ function checkButton(x, y) {
       playClick();
 
       if (passwordInput.value() === correctPassword) {
+  passwordInput.hide();
 
-        passwordInput.hide();
+  currentLegend = 1;
+  gameState = "legends";
 
-        gameState = "dark";
+  legend1.play();
+}
 
         darkFade = 255;
         fadingToScreen1 = false;
@@ -2647,4 +2666,25 @@ function drawFlippingPage2D(
     4,
     bookHeight
   );
+}
+
+function drawLegends() {
+  background(0);
+
+  let video = currentLegend === 1 ? legend1 : legend2;
+
+  image(video, 0, 0, 800, 600);
+
+  if (currentLegend === 1 && legend1.elt.ended) {
+    currentLegend = 2;
+    legend2.play();
+  }
+
+  if (currentLegend === 2 && legend2.elt.ended) {
+    legend2.stop();
+    gameState = "dark";
+    
+    darkFade = 255;
+    fadingToScreen1 = false;
+  }
 }
