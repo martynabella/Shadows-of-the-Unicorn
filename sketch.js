@@ -722,13 +722,18 @@ function checkButton(x, y) {
 
    if (showLeftPopup || showRightPopup) {
 
-    showLeftPopup = false;
-
-    showRightPopup = false;
-
-    return;
-
+  if (showLeftPopup) {
+    leftPopupFadingOut = true;
+    leftPopupFadingIn = false;
   }
+
+  if (showRightPopup) {
+    rightPopupFadingOut = true;
+    rightPopupFadingIn = false;
+  }
+
+  return;
+}
 
   // =========================
   // DISCLAIMER → START
@@ -1011,13 +1016,14 @@ function checkButton(x, y) {
   // =========================
 
   if (
-    gameState !== "disclaimer" &&
-    gameState !== "start" &&
-    gameState !== "choose" &&
-    gameState !== "enterKey" &&
-    gameState !== "dark" &&
-    gameState !== "book"
-  ) {
+  gameState !== "disclaimer" &&
+  gameState !== "start" &&
+  gameState !== "choose" &&
+  gameState !== "enterKey" &&
+  gameState !== "dark" &&
+  gameState !== "legends" &&
+  gameState !== "book"
+) {
 
     // LEWY
 
@@ -1069,15 +1075,15 @@ function checkButton(x, y) {
 
     // POWRÓT Z PRAWEGO POPUPU
 
-    let insideRightBackButton =
-      x > rightBackButtonX - rightBackButtonWidth / 2 &&
-      x < rightBackButtonX + rightBackButtonWidth / 2 &&
-      y > rightBackButtonY - rightBackButtonHeight / 2 &&
-      y < rightBackButtonY + rightBackButtonHeight / 2;
+    //let insideRightBackButton =
+    //  x > rightBackButtonX - rightBackButtonWidth / 2 &&
+    //  x < rightBackButtonX + rightBackButtonWidth / 2 &&
+    //  y > rightBackButtonY - rightBackButtonHeight / 2 &&
+      // y < rightBackButtonY + rightBackButtonHeight / 2;
 
-    if (
-      insideRightBackButton &&
-      rightPopupAlpha > 0
+    //if (
+      // insideRightBackButton &&
+     // rightPopupAlpha > 0
     ) {
 
       playClick();
