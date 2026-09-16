@@ -340,12 +340,6 @@ function preload() {
 bgMusic = new Audio("bg_music.mp3");
 bgMusic.loop = true;
 bgMusic.volume = 0.5;
-
-  legend1 = createVideo("Legend1.mp4");
-legend2 = createVideo("Legend2.mp4");
-
-legend1.hide();
-legend2.hide();
   
   disclaimer = loadImage("Disclaimer.jpg");
   choose = loadImage("Choose.jpg");
@@ -473,6 +467,15 @@ rightPopup = loadImage("Right.jpg");
 function setup() {
   createCanvas(800, 600);
 
+  legend1 = createVideo("Legend1.mp4");
+legend2 = createVideo("Legend2.mp4");
+
+legend1.hide();
+legend2.hide();
+
+legend1.elt.playsInline = true;
+legend2.elt.playsInline = true;
+
   bgMusic.play().catch(() => {});
 
   // Film nie będzie się zapętlał
@@ -558,6 +561,7 @@ function draw() {
   gameState !== "choose" &&
   gameState !== "enterKey" &&
   gameState !== "dark" &&
+  gameState !== "legends" &&
   gameState !== "book"
 ) {
   drawPermanentButtons();
