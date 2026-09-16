@@ -506,10 +506,7 @@ passwordInput.style("z-index", "1000");
 passwordInput.position(265, 285);
 passwordInput.size(250, 40);
 passwordInput.hide();
-
-  passwordInput.elt.addEventListener("touchend", function () {
-  this.focus();
-});
+  
 }
 
 function draw() {
@@ -955,13 +952,8 @@ function checkButton(x, y) {
 
   passwordInput.show();
 
-  setTimeout(() => {
-    passwordInput.elt.focus();
-  }, 100);
-
   return;
-}
-    }
+}    }
 
     return;
   }
