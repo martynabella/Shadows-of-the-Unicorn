@@ -165,6 +165,9 @@ let endingButtonHeight = 60;
 
 let endingActive = false;
 
+let unicornImage;
+let showUnicorn = false;
+
 // ====================
 // PNG ZAKOŃCZEŃ
 // ====================
@@ -418,6 +421,8 @@ screen5Pages = [
   loadImage("5.2.png")
 ];
 
+unicornImage = loadImage("Unicorn.jpg");
+  
   ending1Pages = [
   loadImage("8.1.png"),
   loadImage("8.2.png"),
@@ -579,6 +584,9 @@ function draw() {
   if (showRightPopup) {
     drawRightPopup();
   }
+  if (showUnicorn) {
+  image(unicornImage, 0, 0, 800, 600);
+}
 }
 
 // ====================
@@ -710,11 +718,22 @@ function touchStarted() {
   return false;
 }
 
+
+
+
 // ====================
 // SPRAWDZANIE PRZYCISKÓW
 // ====================
-
 function checkButton(x, y) {
+
+  // =========================
+  // UNICORN.JPG
+  // =========================
+
+  if (showUnicorn) {
+    showUnicorn = false;
+    return;
+  }
 
   // =========================
   // STARTOWANIE MUZYKI
@@ -1526,25 +1545,31 @@ if (gameState === "screen5") {
       currentEndingPages = ending3Pages;
     }
 
-    if (distance < screen5NextButtonSize / 2) {
+   if (distance < screen5NextButtonSize / 2) {
 
-      // jeśli NIE jesteśmy na ostatnim PNG
-      if (
-        currentEndingPage <
-        currentEndingPages.length - 1
-      ) {
-        playClick();
-        currentEndingPage++;
-      }
+  if (
+    currentEndingPage <
+    currentEndingPages.length - 1
+  ) {
+    playClick();
+    currentEndingPage++;
+  }
 
-      // jeśli JESTEŚMY na ostatnim PNG
-      else {
-        playClick();
-        endingPopup = true;
-      }
+  else {
+  playClick();
 
-      return;
-    }
+  if (
+    (playerChoice === "yes" && screen4Choice === "no") ||
+    (playerChoice === "no" && screen4Choice === "no")
+  ) {
+    showUnicorn = true;
+  } else {
+    endingPopup = true;
+  }
+}
+
+  return;
+}
 
     return;
   }
