@@ -262,10 +262,10 @@ let currentBookPage = 0;
 // Rozmiar całej otwartej książki
 let bookX = 100;
 let bookY = 75;
-let bookWidth = 650;
-let bookHeight = 450;
+let bookWidth = 700;
+let bookHeight = 400;
 
-let pageWidth = 300;
+let pageWidth = 350;
 
 // Animacja przewracania
 let pageTurning = false;
@@ -858,7 +858,7 @@ function checkButton(x, y) {
         y <= bookY + bookHeight
       ) {
 
-        if (currentBookPage + 3 < bookPages.length) {
+        if (currentBookPage + 2 < bookPages.length) {
 
           playClick();
 
