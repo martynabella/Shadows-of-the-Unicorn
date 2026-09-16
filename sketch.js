@@ -498,14 +498,21 @@ function setup() {
 
   }, { passive: false });
 
-  // reszta setup() bez zmian...
-}
 
+  // =========================
+  // START VIDEO
+  // =========================
 
   startVideo = createVideo("Start.mp4");
+
   startVideo.hide();
   startVideo.elt.playsInline = true;
   startVideo.elt.loop = false;
+
+
+  // =========================
+  // LEGENDS
+  // =========================
 
   legend1 = createVideo("Legend1.mp4");
   legend2 = createVideo("Legend2.mp4");
@@ -517,7 +524,10 @@ function setup() {
   legend2.elt.playsInline = true;
 
 
-  // Pole hasła
+  // =========================
+  // POLE HASŁA
+  // =========================
+
   passwordInput = createInput();
 
   passwordInput.attribute("type", "password");
@@ -532,16 +542,18 @@ function setup() {
   passwordInput.style("z-index", "1000");
 
   passwordInput.position(
-    (windowWidth - 800) / 2 + 265,
-    (windowHeight - 600) / 2 + 285
+    265,
+    285
   );
 
   passwordInput.size(250, 40);
+
   passwordInput.hide();
 
   passwordInput.elt.addEventListener("touchend", function () {
     this.focus();
   });
+
 }
 
 function draw() {
