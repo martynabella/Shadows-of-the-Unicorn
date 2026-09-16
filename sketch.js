@@ -473,7 +473,8 @@ rightPopup = loadImage("Right.jpg");
 }
 
 function setup() {
-  createCanvas(800, 600);
+  let canvas = createCanvas(800, 600);
+  canvas.parent("game-container");
 
   startVideo = createVideo("Start.mp4");
   startVideo.hide();
