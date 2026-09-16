@@ -474,9 +474,9 @@ rightPopup = loadImage("Right.jpg");
 function setup() {
   createCanvas(800, 600);
 
-  bgMusic = new Audio("bg_music.mp3");
-  bgMusic.loop = true;
-  bgMusic.volume = 0.5;
+  //bgMusic = new Audio("bg_music.mp3");
+  //bgMusic.loop = true;
+  //bgMusic.volume = 0.5;
 
   startVideo = createVideo("Start.mp4");
   startVideo.hide();
@@ -703,7 +703,10 @@ if (currentLock === 0) {
 
 function mousePressed() {
 
-  if (bgMusic.paused) {
+  if (!bgMusic) {
+    bgMusic = new Audio("bg_music.mp3");
+    bgMusic.loop = true;
+    bgMusic.volume = 0.5;
     bgMusic.play();
   }
 
@@ -717,7 +720,10 @@ function mousePressed() {
 
 function touchStarted() {
 
-  if (bgMusic.paused) {
+  if (!bgMusic) {
+    bgMusic = new Audio("bg_music.mp3");
+    bgMusic.loop = true;
+    bgMusic.volume = 0.5;
     bgMusic.play();
   }
 
@@ -746,10 +752,6 @@ function checkButton(x, y) {
   // =========================
   // STARTOWANIE MUZYKI
   // =========================
-
-  if (bgMusic.paused) {
-    bgMusic.play();
-  }
 
    if (showLeftPopup || showRightPopup) {
 
