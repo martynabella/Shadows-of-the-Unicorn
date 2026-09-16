@@ -467,7 +467,9 @@ rightPopup = loadImage("Right.jpg");
   loadImage("Page18.jpg"),
   loadImage("Page19.jpg"),
   loadImage("Page20.jpg"),
-  loadImage("Page21.jpg")
+  loadImage("Page21.jpg"),
+    loadImage("Page22.jpg"),
+    loadImage("Page23.jpg")
 ];
 }
 
