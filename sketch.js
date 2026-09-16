@@ -1613,7 +1613,6 @@ if (gameState === "screen5") {
 function drawEnterKey() {
   image(enterKey, 0, 0, 800, 600);
 
-  // niewidoczny okrąg potwierdzenia
   noStroke();
   noFill();
 
@@ -1624,6 +1623,10 @@ function drawEnterKey() {
   );
 
   passwordInput.show();
+
+  if (gameState === "enterKey") {
+    passwordInput.elt.focus();
+  }
 }
 
 function playClick() {
