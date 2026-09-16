@@ -720,6 +720,15 @@ function checkButton(x, y) {
     bgMusic.play();
   }
 
+   if (showLeftPopup || showRightPopup) {
+
+    showLeftPopup = false;
+
+    showRightPopup = false;
+
+    return;
+
+  }
 
   // =========================
   // DISCLAIMER → START
