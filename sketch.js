@@ -735,11 +735,6 @@ function touchStarted() {
   return false;
 }
 
-  checkButton(mouseX, mouseY);
-
-  return false;
-}
-
 
 
 
