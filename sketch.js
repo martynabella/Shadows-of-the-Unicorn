@@ -306,7 +306,7 @@ let enterButtonWidth = 150;
 let enterButtonHeight = 50;
 
 let passwordInput;
-let correctPassword = "1861";
+const correctPassword = "1861";
 
 // ====================
 // PRZYCISK POTWIERDZENIA
